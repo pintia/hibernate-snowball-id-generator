@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+group = 'com.github.magicae'
+version = '0.3.0'
+
+description = """hibernate-snowball-id-generator"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.hibernate', name: 'hibernate-core', version:'5.2.8.Final'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'org.assertj', name: 'assertj-core', version:'3.4.1'
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+}
+
+publishing {
+    repositories {
+        maven {
+            url "http://mvn.pat-edu.org/artifactory/pat/"
+            credentials {
+                username 'admin'
+                password 'f3Lq8wcuthLq'
+            }
+        }
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'com.github.magicae'
+            artifactId 'hibernate-snowball-id-generator'
+            from components.java
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}

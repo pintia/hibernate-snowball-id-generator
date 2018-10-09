@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.github.magicae-hibernate-snowball-id-generator.iml" filepath="$PROJECT_DIR$/.idea/modules/com.github.magicae-hibernate-snowball-id-generator.iml" />
       <module fileurl="file://$PROJECT_DIR$/hibernate-snowball-id-generator.iml" filepath="$PROJECT_DIR$/hibernate-snowball-id-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hibernate-snowball-id-generator_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hibernate-snowball-id-generator_main.iml" group="hibernate-snowball-id-generator" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hibernate-snowball-id-generator_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hibernate-snowball-id-generator_test.iml" group="hibernate-snowball-id-generator" />
     </modules>
   </component>
 </project>
