@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'maven-publish'
 
 group = 'com.github.magicae'
-version = '0.3.0'
+version = '0.3.1-SNAPSHOT'
 
 description = """hibernate-snowball-id-generator"""
 
