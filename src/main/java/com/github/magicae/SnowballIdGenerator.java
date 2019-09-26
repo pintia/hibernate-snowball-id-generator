@@ -16,7 +16,7 @@ public class SnowballIdGenerator implements IdentifierGenerator, Configurable {
 
     public static HashMap<String, SnowballIdGenerator> InstanceMap = new HashMap<>();
 
-    private SnowballIdWorker worker = new SnowballIdWorker();
+    private SnowballIdWorker worker;
 
     public Serializable generate(SharedSessionContractImplementor session, Object o) throws HibernateException {
         return worker.nextId();
@@ -34,6 +34,7 @@ public class SnowballIdGenerator implements IdentifierGenerator, Configurable {
     public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
         String name = params.getProperty("name", "");
         if (name.isEmpty()) {
+            worker = new SnowballIdWorker();
             InstanceMap.put(name, this);
         } else {
             worker = InstanceMap.get(name).worker;
