@@ -14,23 +14,30 @@ import java.util.Properties;
 
 public class SnowballIdGenerator implements IdentifierGenerator, Configurable {
 
-  public static HashMap<String, SnowballIdGenerator> InstanceMap = new HashMap<>();
+    public static HashMap<String, SnowballIdGenerator> InstanceMap = new HashMap<>();
 
-  private SnowballIdWorker worker = new SnowballIdWorker();
+    private SnowballIdWorker worker;
 
-  public Serializable generate(SharedSessionContractImplementor session, Object o) throws HibernateException {
-    return worker.nextId();
-  }
-
-  public Long generate() throws RuntimeException {
-    return worker.nextId();
-  }
-
-  // if the generator is configured with "name", we put it into the map, then we can access the instance from other place.
-  @Override
-  public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
-    if (!params.getProperty("name", "").isEmpty()) {
-      InstanceMap.put(params.getProperty("name"), this);
+    public Serializable generate(SharedSessionContractImplementor session, Object o) throws HibernateException {
+        return worker.nextId();
     }
-  }
+
+    public Long generate() throws RuntimeException {
+        return worker.nextId();
+    }
+
+    /**
+     * if the generator is configured with "name", we put it into the map, then we can access the instance from other place.
+     * else we reuse the cache generator
+     * */
+    @Override
+    public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
+        String name = params.getProperty("name", "");
+        if (name.isEmpty()) {
+            worker = new SnowballIdWorker();
+            InstanceMap.put(name, this);
+        } else {
+            worker = InstanceMap.get(name).worker;
+        }
+    }
 }
