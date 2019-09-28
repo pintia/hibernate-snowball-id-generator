@@ -33,7 +33,7 @@ public class SnowballIdGenerator implements IdentifierGenerator, Configurable {
     @Override
     public void configure(Type type, Properties params, ServiceRegistry serviceRegistry) throws MappingException {
         String name = params.getProperty("name", "");
-        if (name.isEmpty()) {
+        if (name.isEmpty() || InstanceMap.get(name) == null) {
             worker = new SnowballIdWorker();
             InstanceMap.put(name, this);
         } else {
